@@ -34,8 +34,17 @@ func (task *Task) CreateTask() {
 	fmt.Println("Task created successfully.")
 }
 
-func (task *Task) moveToDoingState() {
-	task.state = "doing"
+func (task *Task) changeState(state string) {
+	/*
+		state: the new desired state for the task
+	*/
+	if task.state == "todo" && state == "done" {
+		panic("Cannot move task from todo to done directly.")
+	}
+	if task.state == state {
+		panic("Cannot move a task to the same state.")
+	}
+	task.state = state
 }
 
 func findTaskByID(id string) Task {
@@ -50,9 +59,6 @@ func findTaskByID(id string) Task {
 	if t.name == "" {
 		panic("Task not found.")
 	}
-	if t.state != "todo" {
-		panic("Can only move task currently in the TODO state.")
-	}
 	return t
 }
 
@@ -61,6 +67,6 @@ func main() {
 	y := Task{name: "Two"}
 	x.CreateTask()
 	y.CreateTask()
-	y.moveToDoingState()
+	y.changeState("doing")
 	fmt.Println(y)
 }
