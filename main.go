@@ -34,9 +34,33 @@ func (task *Task) CreateTask() {
 	fmt.Println("Task created successfully.")
 }
 
+func (task *Task) moveToDoingState() {
+	task.state = "doing"
+}
+
+func findTaskByID(id string) Task {
+	//generic method to find tasks by id
+	var t Task
+	for _, task := range tasks {
+		if task.id == id {
+			t = task
+			break
+		}
+	}
+	if t.name == "" {
+		panic("Task not found.")
+	}
+	if t.state != "todo" {
+		panic("Can only move task currently in the TODO state.")
+	}
+	return t
+}
+
 func main() {
 	x := Task{name: "one"}
 	y := Task{name: "Two"}
 	x.CreateTask()
 	y.CreateTask()
+	y.moveToDoingState()
+	fmt.Println(y)
 }
