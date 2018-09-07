@@ -13,7 +13,7 @@ var cfgFile string
 
 var rootCmd = &cobra.Command{
 	Use:   "kanban",
-	Short: "Task manager."
+	Short: "Task manager.",
 }
 
 func Execute() {

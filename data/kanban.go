@@ -12,7 +12,7 @@ type Task struct {
 	State string // todo, doing, done
 }
 
-var tasks []Task
+var Tasks []Task
 
 func (task *Task) CreateTask() {
 	/*
@@ -23,18 +23,18 @@ func (task *Task) CreateTask() {
 	if len(task.Name) == 0 {
 		panic("Cannot create an empty task.")
 	}
-	for _, t := range tasks {
+	for _, t := range Tasks {
 		if t.Name == task.Name {
 			panic("The task " + task.Name + " exists")
 		}
 	}
 	task.Id = uuid.Must(uuid.NewV4()).String()
 	task.State = "todo"
-	tasks = append(tasks, *task)
+	Tasks = append(Tasks, *task)
 	fmt.Println("Task created successfully.")
 }
 
-func (task *Task) changeState(state string) {
+func (task *Task) ChangeState(state string) {
 	/*
 		state: the new desired state for the task
 	*/
@@ -47,10 +47,10 @@ func (task *Task) changeState(state string) {
 	task.State = state
 }
 
-func findTaskByID(id string) Task {
-	//generic method to find tasks by id
+func FindTaskByID(id string) Task {
+	//generic method to find Tasks by id
 	var t Task
-	for _, task := range tasks {
+	for _, task := range Tasks {
 		if task.Id == id {
 			t = task
 			break
