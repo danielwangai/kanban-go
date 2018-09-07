@@ -17,7 +17,6 @@ var doneCmd = &cobra.Command{
 		}
 		task := data.FindTaskByID(args[0])
 		task.ChangeState("done")
-		fmt.Println("Task successfully moved to done state.")
 	},
 }
 

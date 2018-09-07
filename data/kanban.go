@@ -39,12 +39,15 @@ func (task *Task) ChangeState(state string) {
 		state: the new desired state for the task
 	*/
 	if task.State == "todo" && state == "done" {
-		panic("Cannot move task from todo to done directly.")
+		fmt.Println("Cannot move task from todo to done directly.")
+		return
 	}
 	if task.State == state {
-		panic("Cannot move a task to the same state.")
+		fmt.Println("Cannot move a task to the same state.")
+		return
 	}
 	task.State = state
+	fmt.Printf("Task successfully moved to %s state.\n", state)
 }
 
 func FindTaskByID(id string) Task {
